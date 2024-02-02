@@ -2,6 +2,8 @@ package com.chele.workshopmongo.domain;
 
 import java.io.Serializable;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+@Document(collection = "user")
 public class User implements Serializable {
     private String id;
     private String name;
