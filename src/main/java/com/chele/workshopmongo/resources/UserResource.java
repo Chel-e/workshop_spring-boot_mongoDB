@@ -3,10 +3,13 @@ package com.chele.workshopmongo.resources;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chele.workshopmongo.domain.User;
+import com.chele.workshopmongo.dto.UserDTO;
 import com.chele.workshopmongo.services.UserService;
 
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,8 +22,9 @@ public class UserResource {
     @Autowired
     private UserService userService;
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<UserDTO>> findAll() {
         List<User> list = userService.findAll();
-        return ResponseEntity.ok().body(list);
+        List<UserDTO> result = list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(result);
     }
 }
