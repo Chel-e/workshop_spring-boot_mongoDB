@@ -8,9 +8,9 @@ import com.chele.workshopmongo.services.UserService;
 
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +26,9 @@ public class UserResource {
         List<User> list = userService.findAll();
         List<UserDTO> result = list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
         return ResponseEntity.ok().body(result);
+    }
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    public ResponseEntity<UserDTO> findById(@PathVariable String id) {
+        return ResponseEntity.ok().body(new UserDTO(userService.findById(id)));
     }
 }
