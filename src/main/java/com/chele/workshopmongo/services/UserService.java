@@ -10,6 +10,7 @@ import com.chele.workshopmongo.domain.User;
 import com.chele.workshopmongo.dto.UserDTO;
 import com.chele.workshopmongo.repositories.UserRepository;
 import com.chele.workshopmongo.services.exceptions.ObjectNotFoundException;
+    
 
 @Service
 public class UserService {
@@ -31,10 +32,18 @@ public class UserService {
             throw new ObjectNotFoundException();
         }
     }
-    public User insert (User user) {
+
+    public User insert(User user) {
         return userRepository.insert(user);
     }
+
     public User fromDTO(UserDTO UserDTO) {
         return new User(UserDTO.getId(), UserDTO.getName(), UserDTO.getEmail());
+    }
+
+    public void delete(String id) {
+        findById(id);
+        userRepository.deleteById(id);
+
     }
 }
