@@ -44,6 +44,15 @@ public class UserService {
     public void delete(String id) {
         findById(id);
         userRepository.deleteById(id);
+    }
 
+    public User update(User user) {
+        User up = findById(user.getId());
+        updateData(up, user);
+        return userRepository.save(up);
+    }
+    private void updateData(User up, User user) {
+        up.setName(user.getName());
+        up.setEmail(user.getEmail());
     }
 }

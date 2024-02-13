@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,6 +50,13 @@ public class UserResource {
     public ResponseEntity<String> delete(@PathVariable String id) {
         userService.delete(id);
         return ResponseEntity.ok().body("Deleted User");
+    }
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@PathVariable String id,@RequestBody UserDTO userDTO) {
+        User user = userService.fromDTO(userDTO);
+        user.setId(id);
+        user = userService.update(user);
+        return ResponseEntity.noContent().build();
     }
     
 }
