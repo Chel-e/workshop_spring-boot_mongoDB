@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.chele.workshopmongo.domain.User;
 /*
 DTO (Data Transfer Object): é um objeto que tem o papel de carregar dados das entidades de forma simples,
-podendo inclusive "projetar" apenas alguns dados da entidade original. Vantagens
+podendo inclusive "projetar" apenas alguns dados da entidade original
  */
 public class UserDTO implements Serializable{
     private String id;
