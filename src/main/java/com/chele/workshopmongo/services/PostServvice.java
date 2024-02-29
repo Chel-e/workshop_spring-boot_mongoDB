@@ -19,6 +19,6 @@ public class PostServvice {
         return post.orElseThrow(() -> new ObjectNotFoundException());
     }
     public List<Post> findByTitle(String text) {
-        return postRepository.findByTitleContainingIgnoreCase(text);
+        return postRepository.findByTitle(text);
     }
 }
